@@ -8,21 +8,28 @@
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 <script type="text/babel">
     const root = document.getElementById("root");
-    function App() { 
-        
-        const [counter, setCounter] = React.useState(0);
-        const onClick = () => {
-            // setCounter(counter + 1); => counter 값이 다른 곳에서 바뀔 수 있는 가능성이 있다.
-            // 현재 state 값으로 활용하고 싶다면
-            setCounter((current) => current + 1);
-
+    function App() {
+        const [minutes, setMinutes] = React.useState(0);
+        const onChange = (event) => {
+            setMinutes(event.target.value);
         }
-        console.log("rendered");
-        console.log("counter>>", counter)
+        const reset = () => {
+            setMinutes(0);
+        }
+        
         return(
         <div>
-            <h3>Total clicks: {counter}</h3>
-            <button onClick={onClick}>Click me</button>
+            <h1 className='h1'>Super Converter</h1>
+            <div>
+                <label htmlFor="minutes">Minutes</label>
+                <input value={minutes} id='minutes' placeholder='Minutes' type="number" onChange={onChange}/>
+            </div>
+
+            <div>
+            <label htmlFor="hours">Hours</label>
+            <input value={Math.floor(minutes / 60)} id='hours' placeholder='Hours' type="number"/>
+            </div>
+            <button onClick={reset}>Reset</button>
         </div>
         )
     };
