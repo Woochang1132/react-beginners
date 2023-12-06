@@ -12,7 +12,9 @@
         
         const [counter, setCounter] = React.useState(0);
         const onClick = () => {
-            setCounter(counter + 1);
+            // setCounter(counter + 1); => counter 값이 다른 곳에서 바뀔 수 있는 가능성이 있다.
+            // 현재 state 값으로 활용하고 싶다면
+            setCounter((current) => current + 1);
 
         }
         console.log("rendered");
