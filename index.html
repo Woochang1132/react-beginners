@@ -7,87 +7,26 @@
 <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 <script type="text/babel">
-    const root = document.getElementById("root");
-    function KmToMiles(){
-        const [distance, setDistance] = React.useState(0);
-        const [invert, setInverted] = React.useState(false);
-        const onChange = (event) =>{
-            setDistance(event.target.value);
-        }
-        const reset = () => {
-            setDistance(0);
-        }
-        const inverted = () => {
-            setInverted((current) => !current)
-        }
-
-        return(
-            <div>
-                <div>
-                    <label htmlFor="km">Km</label>
-                    <input value={invert ? distance * 1.6 : distance} id ='km' type="text" placeholder="Km" onChange={onChange} disabled={invert}/>
-                </div>
-                
-                <div>
-                    <label htmlFor="mile">Mile</label>
-                    <input value={invert ? distance : distance * 0.62137} id ='mile' type="text" placeholder="mile" onChange={onChange} disabled={!invert}/>
-                </div>   
-                    <button onClick={reset}>reset</button>
-                    <button onClick={inverted}>Invert</button>
-            </div>
-        )
+    function Btn({name, big}){
+        return <button style={{
+            backgroundColor: "tomato",
+            color: "white",
+            padding: "10px 20px",
+            border: 0,
+            borderRadius: 10,
+            fontSize : big ? 18 : 12
+        }}>{name}</button>
     }
 
-    function MinutesToHours() {
-        const [amout, setAmout] = React.useState(0);
-        const [inverted, setInverted] = React.useState(false);
-        const onChange = (event) => {
-            setAmout(event.target.value);
-        }
-        const reset = () => {
-            setAmout(0);
-        }
-        const onInverter = () => {
-            reset();
-            setInverted((current) => !current);
-        }
-        
-        return(
-        <div>
-            <div>
-                <label htmlFor="minutes">Minutes</label>
-                <input value={inverted ? Math.floor(amout * 60) : amout} id='minutes' placeholder='Minutes' type="number" onChange={onChange} disabled={inverted === true}/>
-            </div>
-
-            <div>
-            <label htmlFor="hours">Hours</label>
-            <input value={inverted ? amout : Math.floor(amout / 60)} id='hours' placeholder='Hours' type="number" onChange={onChange} disabled={inverted === false}/>
-            </div>
-            <button onClick={reset}>Reset</button>
-            <button onClick={onInverter}>{inverted ? "Turn back" : "Invert" }</button>
-        </div>
-        )
-    };
-
     function App() {    
-        const [index, setIndex] = React.useState("0");    
-        const onSelect = (event) => {
-            setIndex(event.target.value);
-        }
         return(
         <div>
-            <h1 className='h1'>Super Converter</h1>
-            <select value={index} onChange={onSelect}>
-                <option value="0"> Minutes & Hours </option>
-                <option value="1"> Km & Miles </option>    
-            </select>
-            <hr/>
-            {index === "0" ? <MinutesToHours/> : null}
-            {index === "1" ? <KmToMiles/> : null}
-
+            <Btn name ="save Changes" big={true} />
+            <Btn name ="Continue" big={false} />
         </div>
         )
     };
+    const root = document.getElementById("root");
     ReactDOM.render(<App/>, root);
 </script>
     
